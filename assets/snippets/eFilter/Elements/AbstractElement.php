@@ -189,31 +189,31 @@ class AbstractElement implements \eFilter\Interfaces\ElementInterface
         $this->{$name} = $value;
         return $this;
     }
-	
-	public function getTpl($name)
-	{
-		$oldname = null;
-		switch ($name) {
-			case 'filterForm':
-				$oldname = 'tplFilterForm';
-				break;
-			case 'filterReset':
-				$oldname = 'tplFilterReset';
-				break;
-			case 'categoryOuter':
-				$oldname = 'tplOuterCategory';
-				break;
-			case 'categoryNameRow':
-				$oldname = 'filterCatName';
-				break;
-			default:
-				break;
-		}
-		$tpl = $this->loadTpl($name);
-		return !empty($tpl) ? $tpl : $this->getOldTPL($oldname);
-	}
-	
-	protected function loadTpl($name)
+
+    public function getTpl($name)
+    {
+        $oldname = null;
+        switch ($name) {
+            case 'filterForm':
+                $oldname = 'tplFilterForm';
+                break;
+            case 'filterReset':
+                $oldname = 'tplFilterReset';
+                break;
+            case 'categoryOuter':
+                $oldname = 'tplOuterCategory';
+                break;
+            case 'categoryNameRow':
+                $oldname = 'filterCatName';
+                break;
+            default:
+                break;
+        }
+        $tpl = $this->loadTpl($name);
+        return !empty($tpl) ? $tpl : $this->getOldTPL($oldname);
+    }
+    
+    protected function loadTpl($name)
     {
         if (file_exists($this->getTplFolder() . $name . '.tpl')) {
             $tpl = $this->getTplFolder() . $name . '.tpl';
