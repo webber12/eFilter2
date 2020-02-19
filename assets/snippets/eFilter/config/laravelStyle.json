@@ -1,0 +1,4 @@
+{
+    "DBModelClassName" : "\\eFilter\\Models\\DBModelEloquent",
+    "DBModelClassFile" : "Models/DBModelEloquent.php"
+}
