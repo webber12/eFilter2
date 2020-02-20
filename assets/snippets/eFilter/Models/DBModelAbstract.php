@@ -1,8 +1,6 @@
 <?php namespace eFilter\Models;
 
-include_once realpath(__DIR__ . '/../Interfaces/DBModelInterface.php');
-
-use \eFilter\Interfaces\DBModelInterface;
+use eFilter\Interfaces\DBModelInterface;
 
 class DBModelAbstract implements DBModelInterface
 {

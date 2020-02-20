@@ -1,8 +1,6 @@
 <?php namespace eFilter\Controllers;
 
-include_once realpath(__DIR__ . '/DescendantsBuilderAbstract.php');
-
-use \eFilter\Controllers\DescendantsBuilderAbstract;
+use eFilter\Controllers\DescendantsBuilderAbstract;
 
 class DescendantsBuilder extends DescendantsBuilderAbstract
 {

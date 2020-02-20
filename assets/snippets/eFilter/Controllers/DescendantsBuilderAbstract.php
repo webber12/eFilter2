@@ -1,8 +1,6 @@
 <?php namespace eFilter\Controllers;
 
-include_once realpath(__DIR__ . '/../Interfaces/DescendantsBuilderInterface.php');
-
-use \eFilter\Interfaces\DescendantsBuilderInterface;
+use eFilter\Interfaces\DescendantsBuilderInterface;
 
 class DescendantsBuilderAbstract implements DescendantsBuilderInterface
 {

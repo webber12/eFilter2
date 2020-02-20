@@ -1,8 +1,6 @@
 <?php namespace eFilter\Models;
 
-include_once realpath(__DIR__ . '/DBModelAbstract.php');
-
-use \eFilter\Models\DBModelAbstract;
+use eFilter\Models\DBModelAbstract;
 
 class DBModel extends DBModelAbstract
 {

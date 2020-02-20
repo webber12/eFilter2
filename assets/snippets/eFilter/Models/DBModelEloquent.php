@@ -1,6 +1,6 @@
 <?php namespace eFilter\Models;
 
-include_once realpath(__DIR__ . '/DBModel.php');
+use eFilter\Models\DBModel;
 
 use EvolutionCMS\Models\SiteTmplvar;
 use EvolutionCMS\Models\SiteContent;

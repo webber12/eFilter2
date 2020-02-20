@@ -1,8 +1,6 @@
 <?php namespace eFilter\Factories;
 
-include_once realpath(__DIR__ . '/AbstractFactory.php');
-
-use \eFilter\Factories\AbstractFactory;
+use eFilter\Factories\AbstractFactory;
 
 class DBModelFactory extends AbstractFactory
 {

@@ -1,8 +1,6 @@
 <?php namespace eFilter\Factories;
 
-include_once realpath(__DIR__ . '/../Interfaces/FactoryInterface.php');
-
-use \eFilter\Interfaces\FactoryInterface;
+use eFilter\Interfaces\FactoryInterface;
 
 class AbstractFactory implements FactoryInterface
 {

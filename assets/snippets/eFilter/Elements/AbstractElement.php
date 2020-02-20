@@ -1,9 +1,10 @@
 <?php namespace eFilter\Elements;
 
-include_once realpath(__DIR__ . '/../Interfaces/ElementInterface.php');
+use eFilter\Interfaces\ElementInterface;
 
 class AbstractElement implements \eFilter\Interfaces\ElementInterface
 {
+
     protected $oldTPLs = [];
     protected $rowTpl = null;
     protected $outerTpl = null;

@@ -1,15 +1,9 @@
 <?php namespace eFilter;
-include_once(MODX_BASE_PATH . 'assets/lib/Helpers/Config.php');
-include_once(MODX_BASE_PATH . 'assets/snippets/DocLister/lib/DLTemplate.class.php');
-include_once(MODX_BASE_PATH . 'assets/snippets/eFilter/Factories/ConfigFactory.php');
-include_once(MODX_BASE_PATH . 'assets/snippets/eFilter/Factories/DBModelFactory.php');
-include_once(MODX_BASE_PATH . 'assets/snippets/eFilter/Factories/ElementFactory.php');
-include_once(MODX_BASE_PATH . 'assets/snippets/eFilter/Factories/DescendantsBuilderFactory.php');
-
 if (!defined('MODX_BASE_PATH')) { die('What are you doing? Get out of here!'); }
+
+include_once 'autoload.php';
+
 $output = "";
-//use Config;
-//use DBModel;
 
 class eFilter {
 
