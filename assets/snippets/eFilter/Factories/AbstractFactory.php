@@ -18,7 +18,6 @@ class AbstractFactory implements FactoryInterface
     public function load($params = [])
     {
         $this->check();
-        include_once($this->filename);
         return new $this->classname($this->EF, $this->params);
     }
     
@@ -27,12 +26,12 @@ class AbstractFactory implements FactoryInterface
         if (!empty($this->alias)) {
             $className = trim($this->EF->config->getCFGDef($this->alias . 'ClassName', ''));
             $classFile = trim($this->EF->config->getCFGDef($this->alias . 'ClassFile', ''));
-            if (!empty($className) && 
-                !empty($classFile) && 
-                file_exists(realpath(__DIR__ . '/../' . $classFile))
-            ) {
-                $this->filename = realpath(__DIR__ . '/../' . $classFile);
+            if (!empty($className)) {
                 $this->classname = $className;
+            }
+            if (!empty($classFile) && is_readable(MODX_BASE_PATH . $classFile))
+            {
+                include_once(MODX_BASE_PATH . $classFile);
             }
         }
     }
