@@ -4,7 +4,6 @@ use eFilter\Factories\AbstractFactory;
 
 class ElementFactory extends AbstractFactory
 {
-    protected $filename;
     protected $classname;
     protected $_EF; //eFilter object
     protected $elements = []; //array of elements objects

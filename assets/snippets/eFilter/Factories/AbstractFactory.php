@@ -4,7 +4,6 @@ use eFilter\Interfaces\FactoryInterface;
 
 class AbstractFactory implements FactoryInterface
 {
-    protected $filename;
     protected $classname;
     protected $alias;
     
