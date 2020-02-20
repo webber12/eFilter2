@@ -29,8 +29,7 @@ class AbstractFactory implements FactoryInterface
             if (!empty($className)) {
                 $this->classname = $className;
             }
-            if (!empty($classFile) && is_readable(MODX_BASE_PATH . $classFile))
-            {
+            if (!empty($classFile) && is_readable(MODX_BASE_PATH . $classFile)) {
                 include_once(MODX_BASE_PATH . $classFile);
             }
         }

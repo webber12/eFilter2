@@ -4,9 +4,9 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = [
-				'\\DLTemplate' => MODX_BASE_PATH . 'assets/snippets/DocLister/lib/DLTemplate.class.php',
-				'\\Helpers\\Config' => MODX_BASE_PATH . 'assets/lib/Helpers/Config.php'
-			];
+                '\\DLTemplate' => MODX_BASE_PATH . 'assets/snippets/DocLister/lib/DLTemplate.class.php',
+                '\\Helpers\\Config' => MODX_BASE_PATH . 'assets/lib/Helpers/Config.php'
+            ];
         }
         if (isset($classes[$class])) {
             require __DIR__ . $classes[$class];
