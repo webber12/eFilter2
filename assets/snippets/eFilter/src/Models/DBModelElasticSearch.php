@@ -16,7 +16,7 @@ class DBModelElasticSearch extends DBModelEloquent
         parent::__construct($_EF, $params);
         $this->client = \Elasticsearch\ClientBuilder::create()->build();
         $this->indexKey = $this->EF->config->getCFGDef('indexKey', 'efilter');
-        $this->mapping = $this->client->indices()->getMapping( ['index' => $this->indexKey] );
+        $this->mapping = $this->getMapping($this->indexKey);
         $this->numFormats = array_map('trim', explode(',', 'long, integer, short, byte, double, float, half_float, scaled_float'));
     }
 
@@ -62,14 +62,14 @@ class DBModelElasticSearch extends DBModelEloquent
                     if ($this->checkNumber('tv' . $tvId)) {
                         $elasticFilters['bool']['filter'][]['range']['tv' . $tvId]['gte'] = $parts[3];
                     } else {
-                        $addFilter[] = $filter;
+                        $addDLFilters[] = $filter;
                     }
                     break;
                 case 'elt':
                     if ($this->checkNumber('tv' . $tvId)) {
                         $elasticFilters['bool']['filter'][]['range']['tv' . $tvId]['lte'] = $parts[3];
                     } else {
-                        $addFilter[] = $filter;
+                        $addDLFilters[] = $filter;
                     }
                     break;
                 case 'containsOne':
@@ -103,16 +103,11 @@ class DBModelElasticSearch extends DBModelEloquent
         }
         return $tvNames;
     }
-    
-    protected function getMapping()
-    {
-        $properties = [];
-        $tmp = $this->client->indices()->getMapping( ['index' => $this->indexKey] );
-        if (!empty($tmp[$this->indexKey]['mappings']['properties'])) {
-            $properties = $tmp[$this->indexKey]['mappings']['properties'];
-        }
-        return $mapping;
-    }
+	
+	protected function getMapping($indexKey)
+	{
+		return $this->client->indices()->getMapping( ['index' => $indexKey] );
+	}
     
     protected function checkNumber($propertyName)
     {
