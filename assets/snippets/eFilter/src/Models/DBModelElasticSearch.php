@@ -2,18 +2,12 @@
 
 use eFilter\Models\DBModelEloquent;
 
-use EvolutionCMS\Models\SiteTmplvar;
-use EvolutionCMS\Models\SiteContent;
-use EvolutionCMS\Models\SiteTmplvarContentvalue;
-use Illuminate\Support\Facades\DB;
-
 //php-client for elasticsearch
 //install via composer
 //composer require elasticsearch/elasticsearch
 
 include_once MODX_BASE_PATH . 'vendor/autoload.php';
 use Elasticsearch\ClientBuilder;
-
 
 class DBModelElasticSearch extends DBModelEloquent
 {
@@ -40,7 +34,7 @@ class DBModelElasticSearch extends DBModelEloquent
             //дофильтровываем диапазон, если не сложилось с маппингом :)
             if ($result['total'] > 0 && !empty($addDLFilters)) {
                 $DLparams['documents'] = implode(',', array_column($result, 'id'));
-                $DLparams['filters'] = "AND(" . implode(",", $addDLFilters). ")";
+                $DLparams['filters'] = "AND(" . implode(";", $addDLFilters). ")";
                 $result = $this->getList($DLparams);
             } else {
                 $result = json_encode($result);
