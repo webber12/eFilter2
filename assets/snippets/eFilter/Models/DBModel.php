@@ -63,7 +63,7 @@ class DBModel extends DBModelAbstract
         return $rows;
     }
     
-    public function getList($DLparams)
+    public function getList($DLparams, $filters = [], $tvsInfo = [])
     {
         return $this->modx->runSnippet("DocLister", $DLparams);
     }

@@ -495,7 +495,7 @@ protected function getFilterFutureValues($curr_filter_values, $filter_tv_ids = '
 
 protected function collectDLFilter($f, $fid = false)
 {
-    $fltr = '';
+    $fltr = [];
     foreach ($f as $tvid => $v) {
         if (!$fid || $tvid != $fid) {
             $tvid = (int)$tvid;
@@ -503,10 +503,10 @@ protected function collectDLFilter($f, $fid = false)
         
             if (isset($v['min']) || isset($v['max'])) { //если параметр - диапазон
                 if (isset($v['min']) && (int)$v['min'] != 0 ) {
-                    $fltr .= $this->config->getCFGDef('DLFilterType', 'tvd') . ':' . $this->filter_tv_names[$tvid] . ':egt:' . (int)$v['min'] . ';';
+                    $fltr[] = $this->config->getCFGDef('DLFilterType', 'tvd') . ':' . $this->filter_tv_names[$tvid] . ':egt:' . (int)$v['min'];
                 }
                 if (isset($v['max']) && (int)$v['max'] != 0 ) {
-                    $fltr .= $this->config->getCFGDef('DLFilterType', 'tvd') . ':' . $this->filter_tv_names[$tvid] . ':elt:' . (int)$v['max'] . ';';
+                    $fltr[] = $this->config->getCFGDef('DLFilterType', 'tvd') . ':' . $this->filter_tv_names[$tvid] . ':elt:' . (int)$v['max'];
                 }
             } else {//если значение/значения, но не диапазон
                 if (is_array($v)) {
@@ -534,12 +534,12 @@ protected function collectDLFilter($f, $fid = false)
                         }
                     }
                     $val = str_replace(array('(', ')'), array('\(', '\)'), $val);
-                    $fltr .= $this->config->getCFGDef('DLFilterType', 'tvd') . ':' . $this->filter_tv_names[$tvid] . ':' . $oper . ':' . $val.';';
+                    $fltr[] = $this->config->getCFGDef('DLFilterType', 'tvd') . ':' . $this->filter_tv_names[$tvid] . ':' . $oper . ':' . $val;
                 }
             }
         }
     }
-    return substr($fltr, 0 , -1);
+    return $fltr;
 }
 
 public function makeAllContentIDs($DLparams)
@@ -552,10 +552,9 @@ public function makeAllContentIDs($DLparams)
 
             $fltr = $this->collectDLFilter($f);
 
-            if ($fltr != '') {
-                $fltr = 'AND(' . $fltr . ')';
-                $DLparams['filters'] = $fltr;
-                $_ = $this->DBModel->getList($DLparams);
+            if (!empty($fltr)) {
+                $DLparams['filters'] = 'AND(' . implode(';', $fltr) . ')';
+                $_ = $this->DBModel->getList($DLparams, $fltr, $this->filter_param_info);
                 $this->content_ids = $this->getListFromJson($_);
             } else {
                 if ($this->categoryAllProducts) {
@@ -579,16 +578,15 @@ public function makeCurrFilterValuesContentIDs ($DLparams)
         $f = $this->fp;
         if (is_array($f)) {
             foreach ($this->filter_tv_names as $fid =>$name) {
-                $fltr = '';
+                $fltr = [];
                 if (isset($f[$fid])) {
 
                     $fltr = $this->collectDLFilter($f, $fid);
 
                 }
-                if ($fltr != '') {
-                    $fltr = 'AND(' . $fltr . ')';
-                    $DLparams['filters'] = $fltr;
-                    $_ = $this->DBModel->getList($DLparams);
+                if (!empty($fltr)) {
+                    $DLparams['filters'] = 'AND(' . implode(';', $fltr) . ')';
+                    $_ = $this->DBModel->getList($DLparams, $fltr, $this->filter_param_info);
                     $this->curr_filter_values[$fid]['content_ids'] = $this->getListFromJson($_);
                 } else {
                     unset($DLparams['filters']);
