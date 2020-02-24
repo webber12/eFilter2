@@ -98,6 +98,7 @@ public function __construct($params = [])
 {
     $this->modx = EvolutionCMS();
     $this->params = $params;
+
     $this->init($params);
 }
 
@@ -120,9 +121,12 @@ protected function init($params = [])
     $this->setCommaAsSeparator();
 }
 
-
 public function process()
 {
+    $this->getFP();
+    $this->prepareGetParams($this->fp);
+    $this->setCommaAsSeparator();
+
     //получаем значение параметров для категории товара в виде массива
     //если у ресурса не задано - смотрим родителя, если у родителя нет- смотрим дедушку
     $this->filter_param = $this->getFilterParam($this->param_tv_name);
@@ -826,6 +830,11 @@ protected function regClientScript()
 public function isFilter()
 {
     return !empty($this->fp);
+}
+
+public function getFilterParamInfo()
+{
+    return $this->filter_param_info;
 }
 
 protected function decorateFilterResult($content_ids, $fp)
