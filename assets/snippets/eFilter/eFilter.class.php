@@ -123,9 +123,6 @@ protected function init($params = [])
 
 public function process()
 {
-    $this->getFP();
-    $this->prepareGetParams($this->fp);
-    $this->setCommaAsSeparator();
 
     //получаем значение параметров для категории товара в виде массива
     //если у ресурса не задано - смотрим родителя, если у родителя нет- смотрим дедушку
