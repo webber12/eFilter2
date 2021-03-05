@@ -6,12 +6,12 @@ class DBModel extends DBModelAbstract
 {
     public function getTvName($tvid)
     {
-        return $this->modx->db->getValue("SELECT `name` FROM " . $this->modx->getFullTableName('site_tmplvars') . " WHERE id = {$tvid} LIMIT 0,1");
+        return $this->modx->db->getValue($this->modx->db->query("SELECT `name` FROM " . $this->modx->getFullTableName('site_tmplvars') . " WHERE id = {$tvid} LIMIT 0,1"));
     }
     
     public function getParent($docid)
     {
-        return $this->modx->db->getValue("SELECT parent FROM " . $this->modx->getFullTableName('site_content') . " WHERE id = {$docid} LIMIT 0,1");;
+        return $this->modx->db->getValue($this->modx->db->query("SELECT parent FROM " . $this->modx->getFullTableName('site_content') . " WHERE id = {$docid} LIMIT 0,1"));
     }
     /*
     public function getTVNames($obj, $tv_ids, $field = 'name')
